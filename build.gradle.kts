@@ -23,7 +23,7 @@ dependencies {
 //    compileOnly("com.github.monun:invfx:2.0.0")
 
     implementation("com.github.monun:tap:3.6.0")
-    implementation("com.github.monun:kommand:1.0.0")
+//    implementation("com.github.monun:kommand:1.0.0")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.0")
     testImplementation("org.junit.jupiter:junit-jupiter-engine:5.7.0")
@@ -68,6 +68,7 @@ tasks {
         archiveClassifier.set(classifier)
         from(sourceSets["main"].output)
         configurations = listOf(project.configurations.implementation.get().apply { isCanBeResolved = true })
+        minimize()
     }
 
     create<ShadowJar>("pluginJar") {
