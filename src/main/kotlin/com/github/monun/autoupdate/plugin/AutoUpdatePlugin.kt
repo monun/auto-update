@@ -3,12 +3,9 @@ package com.github.monun.autoupdate.plugin
 import com.github.monun.tap.config.Config
 import com.github.monun.tap.config.RangeInt
 import com.github.monun.tap.config.computeConfig
-import net.kyori.adventure.identity.Identified
-import net.kyori.adventure.identity.Identity
-import net.kyori.adventure.text.Component
-import net.md_5.bungee.api.ChatColor
-import org.bukkit.Bukkit
-import org.bukkit.entity.Player
+import net.kyori.adventure.text.Component.space
+import net.kyori.adventure.text.Component.text
+import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.plugin.Plugin
 import org.bukkit.plugin.java.JavaPlugin
 import java.io.File
@@ -55,8 +52,11 @@ class AutoUpdatePlugin : JavaPlugin(), Runnable {
 
         updates.removeIf { update ->
             if (update.second.exists()) {
-                server.sendMessage(Component.text("${ChatColor.LIGHT_PURPLE}Found update file for plugin ${update.first.name}."))
-                server.sendMessage(Component.text("${ChatColor.LIGHT_PURPLE}Server will ${updateAction.name.toLowerCase()} in ${countdownTicks.div(20)} seconds."))
+                server.sendMessage(
+                    text().content("Found update file for plugin").color(NamedTextColor.LIGHT_PURPLE)
+                        .append(space())
+                        .append(text().content(update.first.name).color(NamedTextColor.GOLD))
+                )
                 updateTicks = countdownTicks
                 true
             } else false
